@@ -7,7 +7,7 @@ import adafruit_ssd1306
 
 from player import Player
 from ground import Ground
-from cactus import CactusContainer
+from cactus_container import CactusContainer
 from constants import height, width, frame_rate_constant, ground_height
 
 class InfiniteRunner:

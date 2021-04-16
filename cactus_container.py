@@ -1,23 +1,8 @@
 from random import random
 from math import floor
 
+from moving_objects.cactus import Cactus
 from constants import height, width, ground_height, ground_speed, max_ground_mark_length, cactus_space, cactus_height
-
-class Cactus:
-  def __init__(self):
-    self.x = width
-    self.y = height - ground_height
-    self.length = max_ground_mark_length
-    # TODO Make a bounding box for collisions
-
-  # Returns true if it has fully gone offscreen
-  def move(self):
-    self.x -= ground_speed
-    return (self.x + self.length - 1) < 0
-  
-  def render(self, draw):
-    draw.rectangle((self.x, self.y - cactus_height, self.x + self.length - 1, self.y - 1), outline=255, fill=0)
-
 
 class CactusContainer:
   def __init__(self):

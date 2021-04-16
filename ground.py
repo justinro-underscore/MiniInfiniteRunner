@@ -1,19 +1,7 @@
 from random import random
-from math import floor
 
+from moving_objects.ground_mark import GroundMark
 from constants import height, width, ground_height, ground_mark_probability, max_ground_mark_length, ground_speed
-
-class GroundMark:
-  def __init__(self, x=width):
-    self.x = x
-    self.y = height - floor(random() * (ground_height - 2)) - 1
-    self.length = max_ground_mark_length
-
-  # Returns true if it has fully gone offscreen
-  def move(self):
-    self.x -= ground_speed
-    return (self.x + self.length - 1) < 0
-
 
 class Ground:
   def __init__(self):
@@ -58,4 +46,4 @@ class Ground:
   def render(self, draw):
     draw.line((0, height - ground_height, width, height - ground_height), fill=255, width=1)
     for ground_mark in self.ground_marks:
-      draw.line((ground_mark.x, ground_mark.y, ground_mark.x + ground_mark.length - 1, ground_mark.y), fill=255, width=1)
+      ground_mark.render(draw)
