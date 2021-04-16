@@ -2,7 +2,7 @@ from random import random
 from math import floor
 
 from moving_object import MovingObject
-from constants import height, width, ground_height, ground_mark_probability, max_ground_mark_length, ground_speed
+from constants import height, width, ground_height, ground_mark_probability, max_ground_mark_length
 
 class GroundMark(MovingObject):
   def __init__(self):

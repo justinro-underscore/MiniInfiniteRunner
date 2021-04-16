@@ -2,10 +2,12 @@ from random import random
 
 from moving_objects.ground_mark import GroundMark
 from moving_objects.cactus import Cactus
-from constants import height, width, ground_height, ground_speed, ground_mark_probability, max_ground_mark_length, cactus_space
+from constants import height, width, ground_height, init_ground_speed, ground_mark_probability, max_ground_mark_length, cactus_space
 
 class Ground:
   def __init__(self):
+    self.ground_speed = init_ground_speed
+
     self.ground_marks = [GroundMark()]
     self.curr_ground_length = 0
     self.generating_ground_marks = False
@@ -15,7 +17,7 @@ class Ground:
 
   def __move_objects(self):
     for moving_object in self.ground_marks + self.cacti:
-      moving_object.move()
+      moving_object.move(self.ground_speed)
 
     if len(self.ground_marks) > 0 and self.ground_marks[0].is_offscreen():
       self.ground_marks = self.ground_marks[1:]
@@ -26,7 +28,7 @@ class Ground:
     # If not currently generating a ground mark...
     if not self.generating_ground_marks:
       # Set the ground mark length to what is currently shown on screen
-      self.curr_ground_length += ground_speed
+      self.curr_ground_length += self.ground_speed
       # Use linear interpolation to see if we should cut off the ground mark at its current length
       probability = self.curr_ground_length / max_ground_mark_length
       end_mark = random() < probability
@@ -45,7 +47,7 @@ class Ground:
       self.generating_ground_marks = False
 
   def __generate_cacti(self):
-    self.cactus_wait_count -= ground_speed
+    self.cactus_wait_count -= self.ground_speed
     if self.cactus_wait_count < 0:
       self.cacti += [Cactus()]
       self.cactus_wait_count = cactus_space

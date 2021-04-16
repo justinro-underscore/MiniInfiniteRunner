@@ -1,16 +1,15 @@
-from constants import width, ground_speed
+from constants import width
 
 # Abstract class
 class MovingObject:
-  def __init__(self, y, length, height, moving_speed=ground_speed):
+  def __init__(self, y, length, height):
     self.x = width
     self.y = y
     self.length = length
     self.height = height
-    self.moving_speed = moving_speed
 
-  def move(self):
-    self.x -= self.moving_speed
+  def move(self, speed):
+    self.x -= speed
 
   # Returns true if it has fully gone offscreen
   def is_offscreen(self):
