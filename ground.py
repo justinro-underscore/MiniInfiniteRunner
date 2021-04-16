@@ -32,7 +32,7 @@ class Ground:
   def __generate_ground_marks(self):
     # If not currently generating a ground mark...
     if not self.generating_ground_marks:
-      # Move the ground mark length to what is currently shown on screen
+      # Set the ground mark length to what is currently shown on screen
       self.curr_ground_length += ground_speed
       # Use linear interpolation to see if we should cut off the ground mark at its current length
       probability = self.curr_ground_length / max_ground_mark_length
@@ -42,13 +42,13 @@ class Ground:
         # Set the ground mark's length to its current length
         self.ground_marks[0].length = self.curr_ground_length
         # Reset to prepare for generating a new ground mark
-        self.curr_ground_length = 0
         self.generating_ground_marks = True
 
     # If currently generating a ground mark and we should place a new ground mark
     if self.generating_ground_marks and random() < ground_mark_probability:
       # Append a new ground mark to the front of the queue
       self.ground_marks = [GroundMark()] + self.ground_marks
+      self.curr_ground_length = 0
       self.generating_ground_marks = False
 
   def update(self):
