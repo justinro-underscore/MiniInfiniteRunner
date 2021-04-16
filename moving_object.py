@@ -9,9 +9,11 @@ class MovingObject:
     self.height = height
     self.moving_speed = moving_speed
 
-  # Returns true if it has fully gone offscreen
   def move(self):
     self.x -= self.moving_speed
+
+  # Returns true if it has fully gone offscreen
+  def is_offscreen(self):
     return (self.x + self.length - 1) < 0
 
   def render(self, draw):
