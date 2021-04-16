@@ -1,6 +1,6 @@
 from gpiozero import Button
 
-from constants import height, jump_force, gravity_force, player_height, ground_height, max_air_time
+from constants import height, init_jump_velocity, gravity_accel, player_height, ground_height, max_air_time
 
 class Player:
   def __init__(self):
@@ -18,7 +18,7 @@ class Player:
   def __jump(self):
     if not self.in_air:
       self.in_air = True
-      self.y_vel = jump_force
+      self.y_vel = init_jump_velocity
       self.air_time = 0
 
   def update(self):
@@ -27,7 +27,7 @@ class Player:
       if self.y_vel == 0 and self.jump_button.is_pressed and self.air_time < max_air_time:
         self.air_time += 1
       else:
-        self.y_vel -= gravity_force
+        self.y_vel -= gravity_accel
 
       if self.y > height - ground_height:
         self.y = height - ground_height
