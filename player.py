@@ -1,6 +1,6 @@
 from gpiozero import Button
 
-from constants import height, init_jump_velocity, gravity_accel, player_height, ground_height, max_air_time
+from constants import height, player_height, player_width, player_x_offset, init_jump_velocity, gravity_accel, max_air_time, ground_height
 
 class Player:
   def __init__(self):
@@ -10,7 +10,7 @@ class Player:
     self.jump_button.when_pressed = self.__jump
 
     # Setup game variables
-    self.y = height - ground_height # Bottom y position
+    self.y = height - ground_height # Bottom y position, feet should be in the ground line
     self.y_vel = 0
     self.in_air = False
     self.air_time = 0
@@ -35,4 +35,4 @@ class Player:
         self.in_air = False
   
   def render(self, draw):
-    draw.rectangle((2, self.y - player_height, 4, self.y), outline=255, fill=255)
+    draw.rectangle((player_x_offset, self.y - player_height, player_x_offset + player_width - 1, self.y - 1), outline=255, fill=255) # Move player model up 1 so on the ground

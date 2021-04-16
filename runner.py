@@ -25,7 +25,7 @@ class InfiniteRunner:
     draw.rectangle((0, 0, width, height), outline=0, fill=0)
 
     # Ground
-    draw.line((0, height - ground_height + 1, width, height - ground_height + 1), fill=255, width=1)
+    draw.line((0, height - ground_height, width, height - ground_height), fill=255, width=1)
 
     # Objects
     self.player.render(draw)
