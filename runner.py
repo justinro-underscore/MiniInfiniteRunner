@@ -6,6 +6,7 @@ from PIL import Image, ImageDraw, ImageFont
 import adafruit_ssd1306
 
 from player import Player
+from ground import Ground
 from constants import height, width, frame_rate_constant, ground_height
 
 class InfiniteRunner:
@@ -19,19 +20,19 @@ class InfiniteRunner:
     self.oled.show()
 
     self.player = Player()
+    self.ground = Ground()
+
+  def __udpate(self):
+    self.player.update()
+    self.ground.update()
 
   def __render(self, draw):
     # Draw a black filled box to clear the image.
     draw.rectangle((0, 0, width, height), outline=0, fill=0)
 
-    # Ground
-    draw.line((0, height - ground_height, width, height - ground_height), fill=255, width=1)
-
     # Objects
     self.player.render(draw)
-
-  def __udpate(self):
-    self.player.update()
+    self.ground.render(draw)
 
   def run(self):
     # Create blank image for drawing.
