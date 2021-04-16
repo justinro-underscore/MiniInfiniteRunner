@@ -7,6 +7,7 @@ import adafruit_ssd1306
 
 from player import Player
 from ground import Ground
+from cactus import CactusContainer
 from constants import height, width, frame_rate_constant, ground_height
 
 class InfiniteRunner:
@@ -21,10 +22,12 @@ class InfiniteRunner:
 
     self.player = Player()
     self.ground = Ground()
+    self.cactus_container = CactusContainer()
 
   def __udpate(self):
     self.player.update()
     self.ground.update()
+    self.cactus_container.update()
 
   def __render(self, draw):
     # Draw a black filled box to clear the image.
@@ -33,6 +36,7 @@ class InfiniteRunner:
     # Objects
     self.player.render(draw)
     self.ground.render(draw)
+    self.cactus_container.render(draw)
 
   def run(self):
     # Create blank image for drawing.
