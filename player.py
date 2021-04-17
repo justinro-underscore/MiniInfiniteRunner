@@ -21,6 +21,9 @@ class Player:
       self.y_vel = init_jump_velocity
       self.air_time = 0
 
+  def get_collider(self):
+    return (player_x_offset, self.y - player_height, player_x_offset + player_width - 1, self.y - 1) # Move player model up 1 so on the ground
+
   def update(self):
     if self.in_air:
       self.y -= self.y_vel
@@ -35,4 +38,4 @@ class Player:
         self.in_air = False
   
   def render(self, draw):
-    draw.rectangle((player_x_offset, self.y - player_height, player_x_offset + player_width - 1, self.y - 1), outline=255, fill=255) # Move player model up 1 so on the ground
+    draw.rectangle(self.get_collider(), outline=255, fill=255)

@@ -7,6 +7,8 @@ import adafruit_ssd1306
 
 from player import Player
 from ground import Ground
+
+from physics import is_touching
 from constants import height, width, frame_rate_constant, ground_height
 
 class InfiniteRunner:
@@ -19,20 +21,29 @@ class InfiniteRunner:
     self.oled.fill(0)
     self.oled.show()
 
+    self.game_over = False
+
     self.player = Player()
     self.ground = Ground()
 
+  def __check_for_game_over(self):
+    if len(self.ground.cacti) > 0:
+      front_cactus = self.ground.cacti[0]
+      if is_touching(self.player.get_collider(), front_cactus.get_collider()):
+        self.game_over = True
+
   def __udpate(self):
-    self.player.update()
     self.ground.update()
+    self.player.update()
+    self.__check_for_game_over()
 
   def __render(self, draw):
     # Draw a black filled box to clear the image.
     draw.rectangle((0, 0, width, height), outline=0, fill=0)
 
     # Objects
-    self.player.render(draw)
     self.ground.render(draw)
+    self.player.render(draw)
 
   def run(self):
     # Create blank image for drawing.
@@ -40,7 +51,7 @@ class InfiniteRunner:
     image = Image.new('1', (width, height))
     draw = ImageDraw.Draw(image)
 
-    while True:
+    while not self.game_over:
       self.__udpate()
 
       # Display image.

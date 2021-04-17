@@ -15,8 +15,15 @@ class MovingObject:
   def is_offscreen(self):
     return (self.x + self.length - 1) < 0
 
+  def __get_render_collider(self):
+    return (self.x, self.y - self.height + 1, self.x + self.length - 1, self.y)
+
+  # Could be overwritten
+  def get_collider(self):
+    return self.__get_render_collider()
+
   def render(self, draw):
     if self.height == 1:
-      draw.line((self.x, self.y, self.x + self.length - 1, self.y), fill=255, width=1)
+      draw.line(self.__get_render_collider(), fill=255, width=1)
     else:
-      draw.rectangle((self.x, self.y - self.height, self.x + self.length - 1, self.y - 1), outline=255, fill=0)
+      draw.rectangle(self.__get_render_collider(), outline=255, fill=0)
