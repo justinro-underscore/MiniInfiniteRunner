@@ -35,7 +35,7 @@ class Ground:
       # If we should cut off the mark...
       if end_mark:
         # Set the ground mark's length to its current length
-        self.ground_marks[0].length = self.curr_ground_length
+        self.ground_marks[len(self.ground_marks) - 1].length = self.curr_ground_length
         # Reset to prepare for generating a new ground mark
         self.generating_ground_marks = True
 
