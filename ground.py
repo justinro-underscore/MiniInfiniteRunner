@@ -48,6 +48,7 @@ class Ground:
       self.generating_ground_marks = False
 
   def __generate_cacti(self):
+    return
     self.cactus_wait_count -= self.ground_speed
     if self.cactus_wait_count < 0:
       self.cacti += [Cactus()]

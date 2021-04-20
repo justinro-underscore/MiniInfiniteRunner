@@ -8,9 +8,9 @@ player_height = 5 # Height of the player (in pixels)
 player_width = 3 # Width of the player (in pixels)
 player_x_offset = 2 # Offset of the player's starting position
 
-init_jump_velocity = 8 # Initial jump velocity
+init_jump_velocity = 4 # Initial jump velocity
 gravity_accel = 2 # Acceleration due to gravity
-max_air_time = 10 # For how many frames the player is allowed to stay in the air
+max_air_time = 5 # For how many frames the player is allowed to be jumping in the air
 
 ground_height = 5 # Height of the ground (in pixels)
 init_ground_speed = 2 # How fast the ground should be moving at the start
