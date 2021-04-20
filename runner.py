@@ -7,6 +7,7 @@ import adafruit_ssd1306
 
 from player import Player
 from ground import Ground
+from hi_score import HiScore
 
 from physics import is_touching
 from constants import height, width, frame_rate_constant, ground_height
@@ -25,6 +26,7 @@ class InfiniteRunner:
 
     self.player = Player()
     self.ground = Ground()
+    self.hi_score = HiScore()
 
   def __check_for_game_over(self):
     if len(self.ground.cacti) > 0:
@@ -35,6 +37,10 @@ class InfiniteRunner:
   def __udpate(self):
     self.ground.update()
     self.player.update()
+    self.hi_score.update()
+
+    if self.hi_score.increase_speed():
+      self.ground.increase_speed()
     self.__check_for_game_over()
 
   def __render(self, draw):
@@ -44,6 +50,7 @@ class InfiniteRunner:
     # Objects
     self.ground.render(draw)
     self.player.render(draw)
+    self.hi_score.render(draw)
 
   def run(self):
     # Create blank image for drawing.

@@ -1,3 +1,5 @@
+from PIL import ImageFont
+
 height = 32 # Height of the OLED
 width = 128 # Width of the OLED
 frame_rate_constant = 0.01 # How long between frames
@@ -17,4 +19,19 @@ ground_mark_probability = 0.2 # Probability of if a ground mark should be genera
 max_ground_mark_length = 6 # Longest ground mark that can be made
 
 cactus_height = 10
-cactus_space = 50
+init_cactus_space = 50
+cactus_space_increment = 20
+
+score_speed_increases = [
+  300,
+  500,
+  700,
+  800,
+  900,
+  950,
+  1000,
+  1050,
+  1100
+]
+
+font = ImageFont.load_default()

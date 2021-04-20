@@ -2,7 +2,7 @@ from random import random
 
 from moving_objects.ground_mark import GroundMark
 from moving_objects.cactus import Cactus
-from constants import height, width, ground_height, init_ground_speed, ground_mark_probability, max_ground_mark_length, cactus_space
+from constants import height, width, ground_height, init_ground_speed, ground_mark_probability, max_ground_mark_length, init_cactus_space, cactus_space_increment
 
 class Ground:
   def __init__(self):
@@ -13,7 +13,8 @@ class Ground:
     self.generating_ground_marks = False
 
     self.cacti = []
-    self.cactus_wait_count = cactus_space
+    self.cacti_space = init_cactus_space
+    self.cactus_wait_count = self.cacti_space
 
   def __move_objects(self):
     for moving_object in self.ground_marks + self.cacti:
@@ -50,12 +51,16 @@ class Ground:
     self.cactus_wait_count -= self.ground_speed
     if self.cactus_wait_count < 0:
       self.cacti += [Cactus()]
-      self.cactus_wait_count = cactus_space
+      self.cactus_wait_count = self.cacti_space
 
   def update(self):
     self.__move_objects()
     self.__generate_ground_marks()
     self.__generate_cacti()
+
+  def increase_speed(self):
+    self.ground_speed += 1
+    self.cacti_space += cactus_space_increment * self.ground_speed
 
   def render(self, draw):
     draw.line((0, height - ground_height, width, height - ground_height), fill=255, width=1)
