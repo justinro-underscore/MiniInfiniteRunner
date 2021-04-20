@@ -60,7 +60,7 @@ class Ground:
 
   def increase_speed(self):
     self.ground_speed += 1
-    self.cacti_space += cactus_space_increment * self.ground_speed
+    self.cacti_space += (cactus_space_increment * self.ground_speed) // 3
 
   def render(self, draw):
     draw.line((0, height - ground_height, width, height - ground_height), fill=255, width=1)

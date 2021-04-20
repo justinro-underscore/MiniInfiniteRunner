@@ -20,18 +20,18 @@ max_ground_mark_length = 6 # Longest ground mark that can be made
 
 cactus_height = 10
 init_cactus_space = 50
-cactus_space_increment = 20
+cactus_space_increment = 5
 
 score_speed_increases = [
   300,
-  500,
-  700,
   800,
-  900,
-  950,
-  1000,
-  1050,
-  1100
+  1300,
+  1900,
+  2500,
+  3800,
+  6000,
+  9000,
+  15000
 ]
 
 font = ImageFont.load_default()
