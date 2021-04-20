@@ -35,3 +35,4 @@ score_speed_increases = [
 ]
 
 font = ImageFont.load_default()
+font_width = 6
